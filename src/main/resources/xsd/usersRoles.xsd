@@ -1,0 +1,122 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="com.litvinova.soap_users_roles"
+	targetNamespace="com.litvinova.soap_users_roles"
+	elementFormDefault="qualified">
+
+
+	<xs:complexType name="userNoRoleDto">
+		<xs:sequence>
+			<xs:element name="login" type="xs:string" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="password" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:element name="getAllUsersNoRoleRequest">
+        <xs:complexType/>
+    </xs:element>
+
+  <xs:element name="getAllUsersNoRoleResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userNoRoleDto" type="tns:userNoRoleDto" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+  <xs:complexType name="roleDto">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="userWithRolesDto">
+    <xs:sequence>
+      <xs:element name="login" type="xs:string" />
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="password" type="xs:string" />
+      <xs:element name="roles" type="tns:roleDto" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="getUserByLoginRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="userLogin" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getUserByLoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="userWithRolesDto" type="tns:userWithRolesDto" minOccurs="0"/>
+        <xs:element name="serviceStatus" type="tns:serviceStatus" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="serviceStatus">
+    <xs:sequence>
+      <xs:element name="statusCode" type="xs:string"/>
+      <xs:element name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="deleteUserRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="userLogin" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addUserRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="login" type="xs:string" />
+        <xs:element name="name" type="xs:string" />
+        <xs:element name="password" type="xs:string" />
+        <xs:element name="roles" type="tns:roleDto" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateUserRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="login" type="xs:string" />
+        <xs:element name="name" type="xs:string" />
+        <xs:element name="password" type="xs:string" />
+        <xs:element name="roles" type="tns:roleDto" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+
+ 
